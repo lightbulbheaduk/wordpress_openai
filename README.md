@@ -1,5 +1,5 @@
 # wordpress_openai
-This code can be copied and pasted into a code snippet with the the WPCode Wordpress plugin (to appear with a shortcode).  SEe the results of this code at https://onebread.co.uk
+This code can be copied and pasted into a code snippet with the the WPCode Wordpress plugin (to appear with a shortcode).  See the results of this code at https://onebread.co.uk
 
 Pre-requisites:
 - You will need an OpenAI API key (see https://openai.com/blog/openai-api for details)
