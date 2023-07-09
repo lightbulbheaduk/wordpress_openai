@@ -4,7 +4,7 @@ This code can be copied and pasted into a code snippet with the the WPCode Wordp
 Pre-requisites:
 - You will need an OpenAI API key (see https://openai.com/blog/openai-api for details)
 
-Each call of this complete code costs around $0.15 at the point of writing
+The end to end execution of this code costs around $0.15 at the point of writing
 
 When a user enters a bible passage and clicks on submit, the following happens:
 
