@@ -13,6 +13,7 @@ if(!function_exists("callchatgpt")) {
 			'prompt' => $prompt,
 			'max_tokens' => 500, // each token is about 3/4 of a word and costs around $0.02 per thousand tokens
 			'temperature' => $temp, // 0 = most deterministic, 1 is most creative
+			'presence_penalty' => 1 // -2 = encourage repetition, 2 is avoid repetition
 		);
 
 		// Set the API key in the header of the request
