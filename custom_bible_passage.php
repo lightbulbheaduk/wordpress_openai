@@ -1,25 +1,24 @@
 <?php
-
-$API_KEY = 'your_api_key_here';
-
 // Function to call chatGPT endpoint with prompt 
 // Returns response, time taken and number of tokens for request and response
 if(!function_exists("callchatgpt")) {
 	function callchatgpt($prompt,$temp) {
 		// Set the API endpoint and parameters
-		$url = 'https://api.openai.com/v1/completions';
+		$url = 'https://api.openai.com/v1/chat/completions';
 		$parameters = array(
-			'model' => 'text-davinci-003',
-			'prompt' => $prompt,
+			'model' => 'gpt-3.5-turbo-1106',
+			'messages' => array(
+				array('role' => 'user',
+				'content' => $prompt)),
 			'max_tokens' => 500, // each token is about 3/4 of a word and costs around $0.02 per thousand tokens
 			'temperature' => $temp, // 0 = most deterministic, 1 is most creative
 			'presence_penalty' => 1 // -2 = encourage repetition, 2 is avoid repetition
 		);
 
-		// Set the API key in the header of the request
+		// Set the API key
 		$headers = array(
 			'Content-Type: application/json',
-			'Authorization: Bearer ' . $API_KEY
+			'Authorization: Bearer <YOUR_API_KEY>'
 		);
 
 		// Send the request to the API
@@ -39,7 +38,7 @@ if(!function_exists("callchatgpt")) {
 		$duration = $end_time - $start_time;
 
 		$chatgpt_output = [
-			"response" => json_decode($response, true)['choices'][0]['text'],
+			"response" => json_decode($response, true)['choices'][0]['message']['content'],
 			"time" => $duration,
 			"request_token" => json_decode($response, true)['usage']['prompt_tokens'],
 			"response_token" => json_decode($response, true)['usage']['completion_tokens']
@@ -65,7 +64,7 @@ if(!function_exists("calldalle")) {
 		// Set the API key
 		$headers = array(
 			'Content-Type: application/json',
-			'Authorization: Bearer ' . $API_KEY
+			'Authorization: Bearer <YOUR_API_KEY>'
 		);
 
 		// Send the request to the API
@@ -221,7 +220,7 @@ if (current_user_can('edit_posts')) {
 			$limerick_text .= "<p><em>Generated in " . $limerick_response['time'] . " seconds ";
 			$limerick_text .= "using " . $limerick_response['request_token'] . " request tokens ";
 			$limerick_text .= "and " . $limerick_response['response_token'] . " response tokens ";
-			$limerick_text .= "and the text-davinci-003 model from OpenAI with a temperature of 0.5.";
+			$limerick_text .= "and the gpt-3.5-turbo-1106 model from OpenAI with a temperature of 0.5.";
 			$limerick_text .= "</em></p>";
 			// TODO: Add in the monetary cost of this
 
@@ -240,7 +239,7 @@ if (current_user_can('edit_posts')) {
 			$action_text .= "<p><em>Generated in " . $action_response['time'] . " seconds ";
 			$action_text .= "using " . $action_response['request_token'] . " request tokens ";
 			$action_text .= "and " . $action_response['response_token'] . " response tokens ";
-			$action_text .= "and the text-davinci-003 model from OpenAI with a temperature of 0.7. ";
+			$action_text .= "and the gpt-3.5-turbo-1106 model from OpenAI with a temperature of 0.7. ";
 			$action_text .= "</em></p>";
 			// TODO: Add in the monetary cost of this
 
@@ -259,7 +258,7 @@ if (current_user_can('edit_posts')) {
 			$passages_text .= "<p><em>Generated in " . $passages_response['time'] . " seconds ";
 			$passages_text .= "using " . $passages_response['request_token'] . " request tokens ";
 			$passages_text .= "and " . $passages_response['response_token'] . " response tokens ";
-			$passages_text .= "and the text-davinci-003 model from OpenAI with a temperature of 0.5. ";
+			$passages_text .= "and the gpt-3.5-turbo-1106 model from OpenAI with a temperature of 0.5. ";
 			$passages_text .= "</em></p>";
 			// TODO: Add in the monetary cost of this
 
